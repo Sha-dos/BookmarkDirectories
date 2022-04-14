@@ -1,5 +1,6 @@
 use std::{env, fs};
-use std::env::home_dir;
+use std::borrow::Borrow;
+use std::env::{home_dir, set_current_dir};
 use std::fs::{File, OpenOptions};
 use std::io::{Read, Write};
 use std::path::PathBuf;
@@ -71,7 +72,10 @@ fn ParseFile(mut filepath: String, phrase: String) {
     lineToUse.replace(&phrase, "");
     let path = lineToUse.replace(&phrase, "");
     println!("Path: {}", path);
-    RunCommand(path);
+    //RunCommand(path);
+    //assert!(env::set_current_dir(&path).is_ok());
+    //RunCommand("command.sh".to_string());
+    RunCdCommand(path);
 }
 
 fn ReadLines<P>(filename: P) -> io::Result<io::Lines<io::BufReader<File>>>
@@ -85,4 +89,25 @@ fn RunCommand(path: String) {
     program.push_str(&*path);
     println!("Command: {}", program);
     Command::new(program).spawn().expect("Error running command");
+}
+
+fn RunCdCommand(path: String) {
+    let mut file = OpenOptions::new()
+        .write(true)
+        .create(true)
+        .truncate(true)
+        .open(dirs::home_dir().unwrap().display().to_string() + "/RunCdCommand.bash")
+        .unwrap();
+
+    let mut program = String::new();
+    program.push_str("cd");
+    program.push_str(&path);
+
+    file.write(&program.as_ref());
+    //Command::new("sleep").arg(".25").spawn().unwrap();
+    let mut command = "source ".to_string();
+    command.push_str(&*dirs::home_dir().unwrap().display().to_string().to_string());
+    command.push_str("RunCdCommand.bash");
+    println!("Running command: {}", command);
+    Command::new(command);
 }
