@@ -15,11 +15,14 @@ fn main() {
     let args: Vec<String> = env::args().collect();
 
     println!("Args length: {}", args.len());
-    if args.len() != 1 {
+
+    if args.len() != 2 {
         eprintln!("Expected 1 argument");
         std::process::exit(69);
     }
+
     let phrase = &args[1];
+    println!("phrase is: {}", phrase);
 
     let filepath = dirs::home_dir().unwrap().display().to_string() + "/SavedDir.txt";
 
