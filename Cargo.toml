@@ -5,7 +5,7 @@ edition = "2021"
 license = "MIT"
 repository = "https://github.com/Sha-dos/BookmarkDirectories"
 readme = "README.md"
-description "A small package for saving and loading directories in terminal"
+description = "A small package for saving and loading directories in terminal"
 
 [[bin]]
 name = "mrk"
