@@ -6,4 +6,4 @@ A small package for saving and loading directories in terminal
 `mrk [Phrase]`
 Phrase = what you want to call your shortcut/calling your shortcut
 # Installation
-`Cargo install Bookmark-Directories`
+`Cargo install BookmarkDirectories`
