@@ -107,7 +107,7 @@ fn RunCdCommand(path: String) {
     //Command::new("sleep").arg(".25").spawn().unwrap();
     let mut command = "source ".to_string();
     command.push_str(&*dirs::home_dir().unwrap().display().to_string().to_string());
-    command.push_str("RunCdCommand.bash");
+    command.push_str("/RunCdCommand.bash");
     println!("Running command: {}", command);
     Command::new(command);
 }
